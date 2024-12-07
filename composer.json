@@ -1,7 +1,12 @@
 {
     "name": "marekskopal/orm-decimal",
     "type": "library",
-    "description": "ORM",
+    "description": "Decimal type from ext-decimal PHP extension mapper for MarekSkopal ORM.",
+    "keywords": [
+        "decimal",
+        "orm",
+        "ext-decimal"
+    ],
     "license": "MIT",
     "authors": [
         {
