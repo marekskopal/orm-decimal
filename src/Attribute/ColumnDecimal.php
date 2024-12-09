@@ -9,7 +9,7 @@ use MarekSkopal\ORM\Attribute\Column;
 use MarekSkopal\ORM\Decimal\Mapper\DecimalMapper;
 
 #[Attribute(Attribute::TARGET_PROPERTY)]
-final readonly class ColumnDecimal extends Column
+final class ColumnDecimal extends Column
 {
     public function __construct(int $precision, int $scale, ?string $name = null, bool $nullable = false,)
     {
