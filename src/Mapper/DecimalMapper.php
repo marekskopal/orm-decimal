@@ -21,10 +21,7 @@ final class DecimalMapper implements MapperInterface
             return null;
         }
 
-        /** @var int $precision */
-        $precision = $columnSchema->extensionOptions['precision'];
-
-        return new Decimal((string) $value, $precision);
+        return new Decimal((string) $value, (int) $columnSchema->precision);
     }
 
     public function mapToColumn(ColumnSchema $columnSchema, string|int|float|bool|object|null $value): ?string

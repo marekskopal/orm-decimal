@@ -23,7 +23,7 @@ final class DecimalMapperTest extends TestCase
             propertyType: PropertyTypeEnum::Extension,
             columnName: 'price',
             columnType: 'decimal',
-            extensionOptions: ['precision' => 2],
+            precision: 2,
         );
 
         $decimalMapper = new DecimalMapper();
@@ -41,7 +41,7 @@ final class DecimalMapperTest extends TestCase
             propertyType: PropertyTypeEnum::Extension,
             columnName: 'price',
             columnType: 'decimal',
-            extensionOptions: ['precision' => 2],
+            precision: 2,
         );
 
         $decimalMapper = new DecimalMapper();
