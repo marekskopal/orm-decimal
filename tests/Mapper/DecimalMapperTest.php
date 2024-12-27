@@ -6,6 +6,7 @@ namespace MarekSkopal\ORM\Decimal\Tests\Mapper;
 
 use Decimal\Decimal;
 use MarekSkopal\ORM\Decimal\Mapper\DecimalMapper;
+use MarekSkopal\ORM\Enum\Type;
 use MarekSkopal\ORM\Schema\ColumnSchema;
 use MarekSkopal\ORM\Schema\EntitySchema;
 use MarekSkopal\ORM\Schema\Enum\PropertyTypeEnum;
@@ -22,7 +23,7 @@ final class DecimalMapperTest extends TestCase
             propertyName: 'price',
             propertyType: PropertyTypeEnum::Extension,
             columnName: 'price',
-            columnType: 'decimal',
+            columnType: Type::Decimal,
             precision: 2,
         );
 
@@ -40,7 +41,7 @@ final class DecimalMapperTest extends TestCase
             propertyName: 'price',
             propertyType: PropertyTypeEnum::Extension,
             columnName: 'price',
-            columnType: 'decimal',
+            columnType: Type::Decimal,
             precision: 2,
         );
 
