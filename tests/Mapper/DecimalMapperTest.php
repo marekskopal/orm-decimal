@@ -19,7 +19,7 @@ final class DecimalMapperTest extends TestCase
 {
     public function testMapToProperty(): void
     {
-        $entitySchema = $this->createMock(EntitySchema::class);
+        $entitySchema = self::createStub(EntitySchema::class);
         $columnSchema = new ColumnSchema(
             propertyName: 'price',
             propertyType: PropertyTypeEnum::Extension,
@@ -38,7 +38,7 @@ final class DecimalMapperTest extends TestCase
 
     public function testMapToPropertyNullable(): void
     {
-        $entitySchema = $this->createMock(EntitySchema::class);
+        $entitySchema = self::createStub(EntitySchema::class);
         $columnSchema = new ColumnSchema(
             propertyName: 'price',
             propertyType: PropertyTypeEnum::Extension,
@@ -56,7 +56,7 @@ final class DecimalMapperTest extends TestCase
 
     public function testMapToPropertyNonNullableThrows(): void
     {
-        $entitySchema = $this->createMock(EntitySchema::class);
+        $entitySchema = self::createStub(EntitySchema::class);
         $columnSchema = new ColumnSchema(
             propertyName: 'price',
             propertyType: PropertyTypeEnum::Extension,
@@ -73,7 +73,7 @@ final class DecimalMapperTest extends TestCase
 
     public function testMapToPropertyNoPrecisionThrows(): void
     {
-        $entitySchema = $this->createMock(EntitySchema::class);
+        $entitySchema = self::createStub(EntitySchema::class);
         $columnSchema = new ColumnSchema(
             propertyName: 'price',
             propertyType: PropertyTypeEnum::Extension,
