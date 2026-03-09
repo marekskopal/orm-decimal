@@ -21,7 +21,11 @@ final class DecimalMapper implements MapperInterface
             return null;
         }
 
-        return new Decimal((string) $value, (int) $columnSchema->precision);
+        if ($columnSchema->precision === null) {
+            throw new \RuntimeException(sprintf('Column "%s" has no precision defined', $columnSchema->columnName));
+        }
+
+        return new Decimal((string) $value, $columnSchema->precision);
     }
 
     public function mapToColumn(ColumnSchema $columnSchema, string|int|float|bool|object|null $value): ?string
@@ -35,7 +39,11 @@ final class DecimalMapper implements MapperInterface
         }
 
         if (!($value instanceof Decimal)) {
-            throw new \RuntimeException('Value is not Decimal');
+            throw new \RuntimeException(sprintf(
+                'Column "%s" expects a Decimal value, got "%s"',
+                $columnSchema->columnName,
+                get_debug_type($value),
+            ));
         }
 
         return $value->toString();

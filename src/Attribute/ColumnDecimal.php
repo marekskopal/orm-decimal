@@ -14,6 +14,20 @@ final class ColumnDecimal extends Column
 {
     public function __construct(int $precision, int $scale, ?string $name = null, bool $nullable = false,)
     {
+        if ($precision <= 0) {
+            throw new \InvalidArgumentException(sprintf('Precision must be greater than 0, got "%d"', $precision));
+        }
+
+        if ($scale < 0) {
+            throw new \InvalidArgumentException(sprintf('Scale must be greater than or equal to 0, got "%d"', $scale));
+        }
+
+        if ($scale >= $precision) {
+            throw new \InvalidArgumentException(
+                sprintf('Scale "%d" must be less than precision "%d"', $scale, $precision),
+            );
+        }
+
         parent::__construct(
             type: Type::Decimal,
             name: $name,
