@@ -16,7 +16,7 @@
     ],
     "require": {
         "php": ">=8.4",
-        "ext-decimal": "*",
+        "ext-decimal": "^1.0",
         "php-decimal/stubs": "^1.1.0",
         "marekskopal/orm": "^1.0 || ^2.0"
     },
