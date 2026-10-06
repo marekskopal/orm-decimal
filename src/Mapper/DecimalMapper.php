@@ -11,7 +11,11 @@ use MarekSkopal\ORM\Schema\EntitySchema;
 
 final class DecimalMapper implements MapperInterface
 {
-    public function mapToProperty(EntitySchema $entitySchema, ColumnSchema $columnSchema, string|int|float|null $value,): ?Decimal
+    /**
+     * The value is never a bool for a DECIMAL column, but marekskopal/orm 2.x passes drivers' native
+     * booleans to extension mappers, so the signature accepts one; it maps to 0 or 1.
+     */
+    public function mapToProperty(EntitySchema $entitySchema, ColumnSchema $columnSchema, string|int|float|bool|null $value,): ?Decimal
     {
         if ($value === null) {
             if (!$columnSchema->isNullable) {
@@ -25,7 +29,7 @@ final class DecimalMapper implements MapperInterface
             throw new \RuntimeException(sprintf('Column "%s" has no precision defined', $columnSchema->columnName));
         }
 
-        return new Decimal((string) $value, $columnSchema->precision);
+        return new Decimal(is_bool($value) ? (string) (int) $value : (string) $value, $columnSchema->precision);
     }
 
     public function mapToColumn(ColumnSchema $columnSchema, string|int|float|bool|object|null $value): ?string

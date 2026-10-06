@@ -11,6 +11,7 @@ use MarekSkopal\ORM\Schema\ColumnSchema;
 use MarekSkopal\ORM\Schema\EntitySchema;
 use MarekSkopal\ORM\Schema\Enum\PropertyTypeEnum;
 use PHPUnit\Framework\Attributes\CoversClass;
+use PHPUnit\Framework\Attributes\TestWith;
 use PHPUnit\Framework\TestCase;
 use RuntimeException;
 
@@ -34,6 +35,25 @@ final class DecimalMapperTest extends TestCase
         self::assertInstanceOf(Decimal::class, $property);
         self::assertSame($property->precision(), 2);
         self::assertSame('1.1', $property->toString());
+    }
+
+    #[TestWith([true, '1'])]
+    #[TestWith([false, '0'])]
+    public function testMapToPropertyNativeBool(bool $value, string $expected): void
+    {
+        $entitySchema = self::createStub(EntitySchema::class);
+        $columnSchema = new ColumnSchema(
+            propertyName: 'price',
+            propertyType: PropertyTypeEnum::Extension,
+            columnName: 'price',
+            columnType: Type::Decimal,
+            precision: 2,
+        );
+
+        $property = new DecimalMapper()->mapToProperty($entitySchema, $columnSchema, $value);
+
+        self::assertInstanceOf(Decimal::class, $property);
+        self::assertSame($expected, $property->toString());
     }
 
     public function testMapToPropertyNullable(): void

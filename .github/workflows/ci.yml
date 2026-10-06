@@ -8,8 +8,11 @@ on:
 
 jobs:
   phpstan:
-    name: PHPStan
+    name: PHPStan (orm ${{ matrix.orm }})
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        orm: ['^1.0', '^2.0']
     steps:
       - uses: actions/checkout@v4
 
@@ -19,6 +22,9 @@ jobs:
           extensions: decimal
 
       - uses: ramsey/composer-install@v3
+
+      - name: Install marekskopal/orm ${{ matrix.orm }}
+        run: composer update marekskopal/orm --with "marekskopal/orm:${{ matrix.orm }}" --with-all-dependencies --no-interaction
 
       - run: vendor/bin/phpstan analyse
 
@@ -38,8 +44,11 @@ jobs:
       - run: vendor/bin/phpcs
 
   phpunit:
-    name: PHPUnit
+    name: PHPUnit (orm ${{ matrix.orm }})
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        orm: ['^1.0', '^2.0']
     steps:
       - uses: actions/checkout@v4
 
@@ -49,5 +58,10 @@ jobs:
           extensions: decimal
 
       - uses: ramsey/composer-install@v3
+
+      - name: Install marekskopal/orm ${{ matrix.orm }}
+        run: composer update marekskopal/orm --with "marekskopal/orm:${{ matrix.orm }}" --with-all-dependencies --no-interaction
+
+      - run: composer show marekskopal/orm | grep versions
 
       - run: vendor/bin/phpunit
