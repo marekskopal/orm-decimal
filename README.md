@@ -8,8 +8,8 @@
 ## Requirements
 
 - PHP >= 8.4
-- [`ext-decimal`](https://php-decimal.io/) PHP extension
-- [`marekskopal/orm`](https://github.com/marekskopal/orm) ^1.0
+- [`ext-decimal`](https://php-decimal.io/) PHP extension 1.x
+- [`marekskopal/orm`](https://github.com/marekskopal/orm) ^1.0 or ^2.0
 
 ## Installation
 
